@@ -4,7 +4,7 @@
  * Plugin URI: https://wordpress.org/plugins/wc-gateway-payburner/
  * Description: Accept XRP coin payments in your store.
  * Author: Payburner
- * Author URI: http://www.payburner.com
+ * Author URI: https://github.com/payburner
  * Version: 1.0.0
  * Text Domain: wc-gateway-payburner
  * Domain Path: /languages
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'WC_PAYBURNER_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
-define( 'WC_PAYBURNER_VERSION', '2.1.9' );
+define( 'WC_PAYBURNER_VERSION', '0.0.11' );
 define( 'WC_PAYBURNER_MIN_PHP_VER', '5.3.0' );
 define( 'WC_PAYBURNER_MIN_WC_VER', '2.5.0' );
 define( 'WC_PAYBURNER_MAIN_FILE', __FILE__ );
@@ -86,7 +86,7 @@ if ( ! class_exists( 'WC_Payburner' ) ) {
 			/*
 			 * Need make wc aware of the Gateway class
 			 * */
-			add_filter( 'wc_payment_gateways', array( $this, 'add_gateways' ) );
+			add_filter( 'woocommerce_payment_gateways', array( $this, 'add_gateways' ) );
 
 		}
 
