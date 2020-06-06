@@ -14,7 +14,7 @@ class PayburnerApi {
 
 	public static function get_purchase( $buttonid, $purchaseid) {
 
-		$path = '/v1/gateway/paybuttons/'.$buttonid.'/purchase/'.$purchaseid;
+		$path = '/v1/gateway/paybuttons/' . $buttonid . '/purchase/'.sanitize_text_field($purchaseid);
 
         $res = wp_remote_get('http://gateway.payburner.com'.$path);
         $res = rest_ensure_response($res);

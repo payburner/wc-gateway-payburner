@@ -1,4 +1,4 @@
-=== WC Gateway Payburner ===
+=== Payburner Payment Gateway ===
 Contributors: payburner
 Tags: xrp woocommerce payment gateway
 Donate link: http://example.com/
@@ -12,16 +12,25 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 This is an XRP payment gateway for wc, using Payburner.
 
 == Description ==
-This gateway allows you to accept XRP payment on wc enabled wp sites.
+This gateway allows you to accept XRP payment on wc enabled wp sites using the Payburner service.  Payburner is an XRP wallet deployed as a browser extension.
+
+This Wordpress plugin imports two javascript files from https://www.payburner.com in order to connect the page to the browser extension and to render and control the Payburner pay button.
+
+The source code for these two javascript files is located at:
+
+https://github.com/payburner/payburner.js
+https://github.com/payburner/paybutton.js
+
+Please note that www.payburner.com collects no PII whatsoever.  The browser extension itself is a what is called a non-custodial hot wallet.  The users maintain full control over the wallet and their funds.
 
 == Installation ==
-1. Upload \"wc-gateway-payburner.php\" as well as the related assets and includes to the \"/wp-content/plugins/\" directory.
+1. Upload the plugin folder to the \"/wp-content/plugins/\" directory.
 2. Activate the plugin through the \"Plugins\" menu in WordPress.
 3. Enable and configure the gateway in the wc payments management tab.
 
 == Frequently Asked Questions ==
-= How do I obtain a paybutton id =
-Go to the google chrome webstore, and search for payburner.  Download and install the plugin.  Then create a pay button using the pay button manager.
+= How do I obtain a paybutton id ? =
+Go to the google chrome webstore, and search for payburner.  Download and install the plugin.  Then create a pay button using the pay button manager.  For further information, please consult the docs: https://github.com/payburner/paybutton-docs
 
 == Screenshots ==
 1. The payburner payment form payburner-payment-form.png
@@ -29,9 +38,17 @@ Go to the google chrome webstore, and search for payburner.  Download and instal
 3. The payment gateway setup payburner-payment-gateway-setup.png
 
 == Changelog ==
+
+= 1.0.1 =
+* Updated for wordpress plugin requirements.
+
 = 1.0.0 =
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Updated for wordpress plugin requirements.
+
 = 1.0.0 =
 This is our initial version.

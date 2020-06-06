@@ -91,10 +91,10 @@ class Payburner_Ajax {
 		$ref_id = wp_create_nonce( "3h62h6u26h42h6i2462h6u4h624" );
 
 		//Get settings from the payment gateway
-        $payburner_options = get_option('wc_payburner_settings');
+        $payburner_options = get_option('woocommerce_payburner_settings');
 		$buttonid = $payburner_options['buttonid'];
 
-        $purchaseId = $_POST['purchaseId'];
+        $purchaseId = sanitize_text_field($_POST['purchaseId']);
         WC()->session->set('paybutton_purchase_id', $purchaseId);
 
 		//Get the purchase from the payburner gateway.
@@ -104,36 +104,37 @@ class Payburner_Ajax {
 		//If we dident get any transactions, return an error.
         if(!$purchase){
 
-            $path = '/v1/gateway/paybuttons/'.$buttonid.'/purchase/'.$purchaseId;
+            $path = '/v1/gateway/paybuttons/' . $buttonid . '/purchase/' . $purchaseId;
 
-            $res ='http://gateway.payburner.com'.$path;
+            $res ='http://gateway.payburner.com' . $path;
 
 			self::error("The purchase wasn't found on Payburner: ".$res);
 			return false;
 		}
-
-		if ($purchase->data->status !== 'SETTLED') {
+        $status = sanitize_text_field($purchase->data->status);
+		if ($status !== 'SETTLED') {
             self::send(array(
                 'match' => false,
                 'matched_transaction' => false,
                 'purchase_id' => $purchaseId,
-                'status' => $purchase->data->status,
+                'status' => $status,
             ));
             return false;
         }
-		else if ($purchase->data->status === 'SETTLED') {
+		else if ($status === 'SETTLED') {
+		    $refId = sanitize_text_field($purchase->data->refId);
             $payburner_purchase_reference = WC()->session->get('paybutton_purchase_reference');
-            if ($purchase->data->refId !== $payburner_purchase_reference) {
+            if ($refId !== $payburner_purchase_reference) {
                 self::error("The purchase was found on Payburner but the reference doesn't match refFound=".$purchase->data->refId);
                 return false;
             }
             else {
-                WC()->session->set('payburner_purchase_status', $purchase->data->status);
+                WC()->session->set('payburner_purchase_status', $status);
                 self::send(array(
                     'match' => true,
                     'matched_transaction' => $ref_id,
                     'purchase_id' => $purchaseId,
-                    'status' => $purchase->data->status,
+                    'status' => $status,
                 ));
 
             }

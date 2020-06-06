@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-return apply_filters( 'wc_payburner_settings',
+return apply_filters( 'woocommerce_payburner_settings',
 	array(
 		'enabled' => array(
 			'title'       => __( 'Enable/Disable', 'wc-gateway-payburner' ),

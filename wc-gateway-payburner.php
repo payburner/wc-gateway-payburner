@@ -1,11 +1,11 @@
 <?php
 /*
- * Plugin Name: WC Gateway Payburner
+ * Plugin Name: Payburner Payment Gateway
  * Plugin URI: https://wordpress.org/plugins/wc-gateway-payburner/
  * Description: Accept XRP coin payments in your store.
  * Author: Payburner
  * Author URI: https://github.com/payburner
- * Version: 1.0.0
+ * Version: 1.0.1
  * Text Domain: wc-gateway-payburner
  * Domain Path: /languages
  *
@@ -80,8 +80,9 @@ if ( ! class_exists( 'WC_Payburner' ) ) {
 		 */
 		public function init_gateways() {
 
+            include_once ( plugin_basename('includes/class-payburner-logger.php'));
 			include_once ( plugin_basename('includes/class-wc-gateway-payburner.php'));
-			 include_once ( plugin_basename('includes/class-payburner-ajax.php'));
+			include_once ( plugin_basename('includes/class-payburner-ajax.php'));
 
 			/*
 			 * Need make wc aware of the Gateway class

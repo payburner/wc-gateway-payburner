@@ -21,7 +21,7 @@ class WC_Gateway_Payburner extends WC_Payment_Gateway {
         $this->method_title = __('Payburner', 'wc-gateway-payburner');
         $this->method_description = __('Payburner works by showing a paybutton and let customers pay XRP to your XRP wallet for orders in your shop.', 'wc-gateway-payburner');
         $this->has_fields = true;
-        $this->icon = '/wp-content/plugins/wc-gateway-payburner/assets/img/pay_with_payburner.png';
+        $this->icon = plugins_url('assets/img/pay_with_payburner.png', WC_PAYBURNER_MAIN_FILE);
         $this->order_button_text = "Waiting for payment";
 
 
@@ -40,7 +40,7 @@ class WC_Gateway_Payburner extends WC_Payment_Gateway {
         $this->test = 'no';
 
         // Hooks.
-        add_action('wc_update_options_payment_gateways_' . $this->id, array(
+        add_action('woocommerce_update_options_payment_gateways_' . $this->id, array(
             $this,
             'process_admin_options'
         ));
@@ -71,7 +71,7 @@ class WC_Gateway_Payburner extends WC_Payment_Gateway {
         echo '<div id="xrp-form"
 			data-email="' . esc_attr($user_email) . '"
 			data-amount="' . esc_attr($this->get_order_total()) . '"
-			data-currency="' . esc_attr(strtolower(get_wc_currency())) . '"
+			data-currency="' . esc_attr(strtolower(get_woocommerce_currency())) . '"
 			">';
 
         //Info box
@@ -86,7 +86,7 @@ class WC_Gateway_Payburner extends WC_Payment_Gateway {
 
         echo '<div id="paybutton-wrapper" style="display: none;">';
 
-        echo '<pay-button allowresetanytime="false" fiatcurrency="' . esc_attr(strtolower(get_wc_currency())) . '" fiatprice="' . esc_attr($this->get_order_total()) . '" reference="' . esc_attr($payburner_purchase_reference) . '" buttonid="' . esc_attr($this->buttonid) . '"/>';
+        echo '<pay-button allowresetanytime="false" fiatcurrency="' . esc_attr(strtolower(get_woocommerce_currency())) . '" fiatprice="' . esc_attr($this->get_order_total()) . '" reference="' . esc_attr($payburner_purchase_reference) . '" buttonid="' . esc_attr($this->buttonid) . '"/>';
 
         echo '</div>';
 
@@ -97,6 +97,10 @@ class WC_Gateway_Payburner extends WC_Payment_Gateway {
         echo '</div>';
 
         echo '<div id="paybutton-process"></div>';
+
+        if ($this->logging) {
+            PayburnerLogger::log('Payment Form Returned. Reference=' . $payburner_purchase_reference . ' Fiat Amount=' . esc_attr($this->get_order_total()));
+        }
 
     }
 
@@ -149,7 +153,7 @@ class WC_Gateway_Payburner extends WC_Payment_Gateway {
      */
     public function process_payment( $order_id ) {
 
-        global $wc;
+        global $woocommerce;
         $order = new WC_Order($order_id);
 
         $order->update_status('processing', __('Awaiting XRP payment', 'wc-gateway-payburner'));
@@ -163,8 +167,12 @@ class WC_Gateway_Payburner extends WC_Payment_Gateway {
         //Mark as paid
         $order->payment_complete();
 
+        if ($this->logging) {
+            PayburnerLogger::log('Payment Processed.  OrderId=' . $order_id . ' PurchaseId=' . WC()->session->get('paybutton_purchase_id') . ', Reference=' . WC()->session->get('paybutton_purchase_reference'));
+        }
+
         // Remove cart
-        $wc->cart->empty_cart();
+        $woocommerce->cart->empty_cart();
         WC()->session->set('purchase_id', false);
         WC()->session->set('payburner_reference', false);
         WC()->session->set('payburner_purchase_status', false);
