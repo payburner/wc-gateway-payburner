@@ -5,7 +5,7 @@ Donate link: http://example.com/
 Requires at least: 4.0
 Tested up to: 4.8
 Requires PHP: 5.6
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,15 @@ The source code for these two javascript files is located at:
 https://github.com/payburner/payburner.js
 https://github.com/payburner/paybutton.js
 
-Please note that www.payburner.com collects no PII whatsoever.  The browser extension itself is a what is called a non-custodial hot wallet.  The users maintain full control over the wallet and their funds.
+payburner.js interacts solely with the payburner browser extension which can be found at https://chrome.google.com/webstore/detail/payburner-browser-extensi/ghigcfhmoaokccllienfhdhdndkfhmop
+
+The browser extension itself is a what is called a non-custodial hot wallet.  The users maintain full control over the wallet and their funds.
+
+paybutton.js interacts with https://gateway.payburner.com to manage the status of the payment on the payburner payment gateway.
+
+On the back end, the php class class-payburner-api.php interacts with https://gateway.payburner.com to check the payment status.
+
+The privacy policy of Payburner and its related sites, including https://www.payburner.com and https://gateway.payburner.com can be found at: https://www.payburner.com/payburner-privacy-policy.txt
 
 == Installation ==
 1. Upload the plugin folder to the \"/wp-content/plugins/\" directory.
@@ -30,7 +38,7 @@ Please note that www.payburner.com collects no PII whatsoever.  The browser exte
 
 == Frequently Asked Questions ==
 = How do I obtain a paybutton id ? =
-Go to the google chrome webstore, and search for payburner.  Download and install the plugin.  Then create a pay button using the pay button manager.  For further information, please consult the docs: https://github.com/payburner/paybutton-docs
+Download and install the payburner browser extension from the chrome store (https://chrome.google.com/webstore/detail/payburner-browser-extensi/ghigcfhmoaokccllienfhdhdndkfhmop).  Then create a pay button using the pay button manager.  For further information, please consult the docs: https://github.com/payburner/paybutton-docs
 
 == Screenshots ==
 1. The payburner payment form payburner-payment-form.png
@@ -39,6 +47,9 @@ Go to the google chrome webstore, and search for payburner.  Download and instal
 
 == Changelog ==
 
+= 1.0.2 =
+* Added privacy policy verbiage
+
 = 1.0.1 =
 * Updated for wordpress plugin requirements.
 
@@ -46,6 +57,9 @@ Go to the google chrome webstore, and search for payburner.  Download and instal
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Added privacy policy verbiage.
 
 = 1.0.1 =
 Updated for wordpress plugin requirements.
