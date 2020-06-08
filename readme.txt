@@ -5,7 +5,7 @@ Donate link: http://example.com/
 Requires at least: 4.0
 Tested up to: 4.8
 Requires PHP: 5.6
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,9 @@ Download and install the payburner browser extension from the chrome store (http
 
 == Changelog ==
 
+= 1.0.3 =
+* Updated paybutton version, fixed bug in form handling.
+
 = 1.0.2 =
 * Added privacy policy verbiage
 
@@ -58,7 +61,10 @@ Download and install the payburner browser extension from the chrome store (http
 
 == Upgrade Notice ==
 
-= 1.0.1 =
+= 1.0.3 =
+Updated paybutton version, fixed bug in form handling.
+
+= 1.0.2 =
 Added privacy policy verbiage.
 
 = 1.0.1 =

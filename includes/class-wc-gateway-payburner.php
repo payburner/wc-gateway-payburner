@@ -115,7 +115,7 @@ class WC_Gateway_Payburner extends WC_Payment_Gateway {
 
 
         wp_enqueue_script('wc_payburner_js', 'https://www.payburner.com/payburner.js', array( 'jquery' ), WC_PAYBURNER_VERSION, true);
-        wp_enqueue_script('wc_button_js', 'https://unpkg.com/@payburner/paybutton.js@0.0.12/dist/pay-button.js', array( 'jquery', 'wc_payburner_js' ), WC_PAYBURNER_VERSION, true);
+        wp_enqueue_script('wc_button_js', 'https://unpkg.com/@payburner/paybutton.js@0.0.13/dist/pay-button.js', array( 'jquery', 'wc_payburner_js' ), WC_PAYBURNER_VERSION, true);
         wp_enqueue_script('jquery-initialize', plugins_url('assets/js/jquery.initialize.js', WC_PAYBURNER_MAIN_FILE), array( 'jquery' ), WC_PAYBURNER_VERSION, true);
 
         wp_enqueue_script('wc_nem_js', plugins_url('assets/js/payburner-checkout.js', WC_PAYBURNER_MAIN_FILE), array(

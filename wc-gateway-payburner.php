@@ -5,7 +5,7 @@
  * Description: Accept XRP coin payments in your store.
  * Author: Payburner
  * Author URI: https://github.com/payburner
- * Version: 1.0.2
+ * Version: 1.0.3
  * Text Domain: wc-gateway-payburner
  * Domain Path: /languages
  *

@@ -40,7 +40,7 @@
 
             this.checkDisablePlaceOrder();
             // let's count to see if all of the required fields have been filled
-            const fieldsArray = $('.wc-checkout').serializeArray();
+            const fieldsArray = $('.woocommerce-checkout').serializeArray();
             var countBad = 0;
             fieldsArray.forEach((field)=>{
                 if ($('#' + field.name + '_field').length === 1 && $('#' + field.name + '_field.validate-required').length === 1) {
@@ -69,7 +69,7 @@
                     if(res.success === true && res.data.match === true){
 
                         // let's do a final check to make sure the required fields are setup
-                        const fieldsArray = $('.wc-checkout').serializeArray();
+                        const fieldsArray = $('.woocommerce-checkout').serializeArray();
                         var countBad = 0;
                         fieldsArray.forEach((field)=>{
                             if ($('#' + field.name + '_field').length === 1 && $('#' + field.name + '_field.validate-required').length === 1) {
